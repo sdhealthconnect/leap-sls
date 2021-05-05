@@ -1,9 +1,8 @@
 package gov.hhs.onc.leap.sls.service.rest;
 
 /**
- * Created by VHA Development Staff - Questions may be directed to Mike Davis, Security and Privacy Architect - 8/31/2016.
+ * ddecouteau@saperi.io
  */
-
 import gov.hhs.onc.leap.service.msg.MsgSource;
 import gov.hhs.onc.leap.sls.service.data.entity.LabelingResult;
 import gov.hhs.onc.leap.sls.service.data.entity.NlpSlsTask;

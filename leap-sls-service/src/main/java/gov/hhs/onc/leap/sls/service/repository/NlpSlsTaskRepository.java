@@ -10,7 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Component;
 
 /**
- * Created by VHA Development Staff - Questions may be directed to Mike Davis, Security and Privacy Architect - 8/31/2016.
+ * ddecouteau@saperi.io
  */
 public interface NlpSlsTaskRepository extends JpaRepository<NlpSlsTask, String> {
 
