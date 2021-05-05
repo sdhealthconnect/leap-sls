@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: ${LEAP_DB_URL}
+    username: ${LEAP_DB_USER}
+    password: ${LEAP_DB_PASS}
+  jpa:
+    hibernate.ddl-auto: create
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl    
+    properties.hibernate.dialect: org.hibernate.dialect.MySQL57Dialect
+    generate-ddl: false
+    show-sql: false
+    
+fhir:
+  r4:
+    baseurl: http://localhost:8080/hapi-fhir-jpaserver/fhir/    

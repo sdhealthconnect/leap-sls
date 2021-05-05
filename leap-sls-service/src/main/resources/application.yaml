@@ -1,0 +1,21 @@
+server:
+  port: 9091
+
+spring:
+    profiles:
+        active: local
+    jpa:
+        open-in-view: false
+        
+logging:
+  file: /tmp/f.log
+  level:
+    root: INFO
+    gov.hhs.onc: DEBUG
+    
+nlp:
+    enabled: false
+
+info:
+  app:
+    name: LEAP SLS Services
