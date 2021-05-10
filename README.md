@@ -7,6 +7,8 @@ items that may be sensitive in nature.
   These services are utilized by LEAP demonstrations for HL7 V2 messaging and HL7 CCDA eHealth Exchange. Supports FHIR based exchanges, and are also accessed by the
    the LEAP Consent UI where a patient may analyze their clinical record to determine if privacy sensitivities exist and act on them when 
    creating a FHIR consent.
+   
+   **Note:** This implementation is based on the HL7 Healthcare Classification System (HCS) specification.   It leverages the foundational work done over a 10 year period at Dept. of Veteran Affairs former Emerging Health Technology Advancement Center (EHTAC).
 
 ## Prerequisites
 - OpenJDK 11.0.6_10
