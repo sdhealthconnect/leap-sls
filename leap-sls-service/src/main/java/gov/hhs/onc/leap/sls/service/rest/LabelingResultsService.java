@@ -3,27 +3,36 @@ package gov.hhs.onc.leap.sls.service.rest;
 /**
  * ddecouteau@saperi.io
  */
+
+import ca.uhn.fhir.context.FhirContext;
+import ca.uhn.fhir.parser.IParser;
+import gov.hhs.onc.leap.fhir.parser.data.FHIRR4BundleAdapter;
 import gov.hhs.onc.leap.service.msg.MsgSource;
-import gov.hhs.onc.leap.sls.service.data.entity.LabelingResult;
-import gov.hhs.onc.leap.sls.service.data.entity.NlpSlsTask;
 import gov.hhs.onc.leap.sls.ccda.parser.CCDAParser;
 import gov.hhs.onc.leap.sls.ccda.parser.data.CCDASimpleBundle;
-
+import gov.hhs.onc.leap.sls.data.data.HCSClinicalFact;
+import gov.hhs.onc.leap.sls.impl.sls.MockSLS;
+import gov.hhs.onc.leap.sls.service.config.ServiceConfigurations;
 import gov.hhs.onc.leap.sls.service.data.LabelingTask;
+import gov.hhs.onc.leap.sls.service.data.entity.LabelingResult;
+import gov.hhs.onc.leap.sls.service.data.entity.NlpSlsTask;
 import gov.hhs.onc.leap.sls.service.repository.LabelingResultRepository;
 import gov.hhs.onc.leap.sls.service.repository.NlpSlsTaskRepository;
 import gov.hhs.onc.leap.sls.service.util.LabelingTaskToLabelingResult;
-import gov.hhs.onc.leap.sls.service.config.ServiceConfigurations;
-import gov.hhs.onc.leap.sls.data.data.HCSClinicalFact;
-import gov.hhs.onc.leap.sls.impl.sls.MockSLS;
 import gov.hhs.onc.leap.v2.parser.HL7V2Parser;
 import gov.hhs.onc.leap.v2.parser.data.V2SimpleBundle;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
+import org.hl7.fhir.r4.model.Bundle;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.web.bind.annotation.*;
 import org.xml.sax.SAXException;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
@@ -36,26 +45,16 @@ import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.ws.rs.core.MediaType;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = "/sls")
-@Tag(name = "SLS-NLP-Controller", description = "API for consuming clinical data and determining its privacy sensitivities.")
+@RequestMapping(path = "/slsnlp")
+@Tag(name = "SLS-Controller", description = "API for consuming clinical data and determining its privacy sensitivities.")
 @Slf4j
 public class LabelingResultsService {
 
     private final static Logger LOGGER = Logger.getLogger(LabelingResultsService.class.getName());
-    
+
+    FhirContext fhirContext = FhirContext.forR4();
     
     @Autowired
     private LabelingResultRepository labelingResultRepo;
@@ -75,7 +74,7 @@ public class LabelingResultsService {
     @Value("${nlp.enabled}")
     private boolean nlpEnabled;
     
-    @Operation(summary = "SLS NLP Processing Queue.",
+    @Operation(summary = "SLS Processing Queue.",
             description = "Access contents of Queue for those message awaiting processing")    
     @GetMapping(path = "/getQueuedTasks")
     public List<String> getQueuedTasks() {
@@ -89,8 +88,8 @@ public class LabelingResultsService {
 
     }
 
-    @Operation(summary = "SLS NLP Processing Results by Type.",
-            description = "Returns listing of SLS NLP processing results by Message Type")    
+    @Operation(summary = "SLS Processing Results by Type.",
+            description = "Returns listing of SLS processing results by Message Type")
     @GetMapping(path = "/getResultsByMessageType")
     public List<LabelingResult> getResultsByMessageType(
                                     @RequestParam(required = true) MsgSource msgsource) throws UnsupportedEncodingException {
@@ -102,8 +101,8 @@ public class LabelingResultsService {
         return allResults;
     }
     
-    @Operation(summary = "SLS NLP Processing Results by Origin.",
-            description = "Returns listing of SLS NLP processing results by their place of origin")    
+    @Operation(summary = "SLS Processing Results by Origin.",
+            description = "Returns listing of SLS processing results by their place of origin")
     @GetMapping(path = "/getResultsByOrigin")
     public List<LabelingResult> getResultsByOrigin(
                                     @RequestParam(required = true) String origin) throws UnsupportedEncodingException {
@@ -115,8 +114,8 @@ public class LabelingResultsService {
         return allResults;
     }
     
-    @Operation(summary = "SLS NLP Processing Results by Id.",
-            description = "Returns result of SLS NLP processing for a specific message.")    
+    @Operation(summary = "SLS Processing Results by Id.",
+            description = "Returns result of SLS processing for a specific message.")
     @GetMapping(path = "/getResultsById")
     public LabelingResult getResultsById(
             @RequestParam("id") String id) throws UnsupportedEncodingException {
@@ -131,8 +130,8 @@ public class LabelingResultsService {
         return result;
     }
 
-    @Operation(summary = "SLS NLP Processing Results by Id and Origin.",
-            description = "Returns result of SLS NLP processing for a specific message.")    
+    @Operation(summary = "SLS Processing Results by Id and Origin.",
+            description = "Returns result of SLS processing for a specific message.")
     @GetMapping(path = "/getResultsByIdAndOrigin")
     public LabelingResult getResultsByIdAndOrigin(
             @RequestParam("id") String id,
@@ -148,8 +147,8 @@ public class LabelingResultsService {
         return result;
     }
     
-    @Operation(summary = "Request SLS NLP Processing.",
-            description = "Submit message for SLS NLP processing.")        
+    @Operation(summary = "Request SLS Processing.",
+            description = "Submit message for SLS processing.")
     @PostMapping(path = "/requestMessageProcessing",
             consumes = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.TEXT_PLAIN},
             produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML}            
@@ -184,8 +183,8 @@ public class LabelingResultsService {
 
     }
 
-    @Operation(summary = "Request SLS NLP Processing.",
-            description = "Submit message for SLS NLP processing.")            
+    @Operation(summary = "Request SLS Processing.",
+            description = "Submit message for SLS processing.")
     @DeleteMapping(path = "/deleteProcessingResult")
     public Response deleteResult(
                 @RequestParam("id") String id,
@@ -230,6 +229,9 @@ public class LabelingResultsService {
 
             if (ccdaRecord.getSecurityLabels().size() !=0 ) { //only send to NLP if there aren't any labels.
                 result = LabelingTaskToLabelingResult.convertCompletedTask(task);
+                result.setId(id);
+                result.setMsgType("CCDA");
+                result.setOrigin(origin);
                 try {
                     LOGGER.log(Level.INFO, String.format("Processing document ID %s is completed in %d milliseconds resulting in %d labels. Saving results. " , id, elapsedTime, ccdaRecord.getSecurityLabels().size()));
                     labelingResultRepo.save(result);
@@ -244,6 +246,9 @@ public class LabelingResultsService {
                 LOGGER.log(Level.INFO, String.format("Processing document ID %s is completed in %d milliseconds. No sensitive codes detected in the structured parts of the documents. Sending the document to unstructured text processing. " , id, elapsedTime));
                 task.addComment("No sensitive codes detected in the structured parts of the record. Sending the record for text analysis.");
                 result =  LabelingTaskToLabelingResult.convertIncompletedTask(task);
+                result.setId(id);
+                result.setMsgType("CCDA");
+                result.setOrigin(origin);
                 try {
                     labelingResultRepo.save(result);
                 }
@@ -261,6 +266,9 @@ public class LabelingResultsService {
                 LOGGER.log(Level.INFO, String.format("Processing document ID %s is completed in %d milliseconds. No sensitive codes detected in the structured parts of the documents. NOT Sending the document to unstructured text processing. " , id, elapsedTime));
                 task.addComment("No sensitive codes detected in the structured parts of the record. Sending the record for text analysis.  NLP Disabled");
                 result =  LabelingTaskToLabelingResult.convertCompletedTask(task);
+                result.setId(id);
+                result.setMsgType("CCDA");
+                result.setOrigin(origin);
                 try {
                     labelingResultRepo.save(result);
                 }
@@ -280,6 +288,49 @@ public class LabelingResultsService {
     
     private LabelingResult processFHIR(String id, String origin, String version, String content) {
         LabelingResult result = new LabelingResult();
+        IParser parser = fhirContext.newJsonParser();
+        Bundle bundle = parser.parseResource(Bundle.class, content);
+        long startTime = System.currentTimeMillis();
+
+        try {
+            FHIRR4BundleAdapter fhirRecord = new FHIRR4BundleAdapter(bundle);
+            LabelingTask task = new LabelingTask(fhirRecord);
+            ArrayList<String> comments = new ArrayList<>();
+            startTime = System.currentTimeMillis();
+            for (HCSClinicalFact fact: fhirRecord.getClinicalFacts()) {
+                slsEngine.labelClinicalFact(fact, comments);
+                if (fact.getSecurityLabels().size() > 0) {
+                    fhirRecord.addSecurityLabel(fact.getSecurityLabels().get(0));
+                }
+            }
+            long elapsedTime = System.currentTimeMillis() - startTime;
+
+            if (fhirRecord.getSecurityLabels().size() == 0) {
+                comments.add("No sensitive codes detected in the structured parts of the record.");
+            }
+            task.addComments(comments);
+            task.addToProcessingTime(elapsedTime);
+
+
+
+            result = LabelingTaskToLabelingResult.convertCompletedTask(task);
+            result.setId(id);
+            result.setMsgType("FHIR");
+            result.setOrigin(origin);
+            try {
+                LOGGER.log(Level.INFO, String.format("Processing FHIR Bundle ID %s is completed in %d milliseconds resulting in %d labels. Saving results. " , id, elapsedTime, fhirRecord.getSecurityLabels().size()));
+                labelingResultRepo.save(result);
+            }
+            catch (DataIntegrityViolationException e)
+            {
+                e.printStackTrace();
+                throw new WebApplicationException(e,409);
+            }
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+            log.error("Failed processing of FHIR Bundle: "+ex.getMessage());
+        }
         
         return result;
     }
@@ -312,6 +363,9 @@ public class LabelingResultsService {
 
 
                 result = LabelingTaskToLabelingResult.convertCompletedTask(task);
+                result.setId(id);
+                result.setMsgType("V2");
+                result.setOrigin(origin);
                 try {
                     LOGGER.log(Level.INFO, String.format("Processing document ID %s is completed in %d milliseconds resulting in %d labels. Saving results. " , id, elapsedTime, v2Record.getSecurityLabels().size()));
                     labelingResultRepo.save(result);
@@ -325,7 +379,7 @@ public class LabelingResultsService {
 
         } catch (Exception e) {
             e.printStackTrace();
-            throw new WebApplicationException("Error in submitted CCDA: " + e, 400);
+            throw new WebApplicationException("Error in submitted V2 Message: " + e, 400);
         }
         
         

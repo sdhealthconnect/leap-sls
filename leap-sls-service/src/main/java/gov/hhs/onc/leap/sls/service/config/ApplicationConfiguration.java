@@ -1,11 +1,12 @@
 
 package gov.hhs.onc.leap.sls.service.config;
 
-import java.net.URL;
-import java.util.concurrent.LinkedBlockingQueue;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.net.URL;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * ddecouteau@saperi.io

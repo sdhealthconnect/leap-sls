@@ -9,6 +9,7 @@ import com.google.common.base.Splitter;
 import gov.hhs.onc.leap.sls.data.data.SimpleHCSConceptDescriptor;
 import gov.hhs.onc.leap.v2.parser.data.SimpleClinicalFact;
 import gov.hhs.onc.leap.v2.parser.data.V2SimpleBundle;
+
 import java.util.Iterator;
 import java.util.UUID;
 import java.util.logging.Logger;

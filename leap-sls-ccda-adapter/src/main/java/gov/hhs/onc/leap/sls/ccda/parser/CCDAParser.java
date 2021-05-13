@@ -1,11 +1,11 @@
 package gov.hhs.onc.leap.sls.ccda.parser;
 
 
-import gov.hhs.onc.leap.sls.data.data.HCSConceptDescriptor;
 import gov.hhs.onc.leap.sls.ccda.parser.data.CCDASimpleBundle;
-import gov.hhs.onc.leap.sls.data.data.SimpleHCSConceptDescriptor;
 import gov.hhs.onc.leap.sls.ccda.parser.data.PlaintextClinicalFactAdapter;
 import gov.hhs.onc.leap.sls.ccda.parser.data.SimpleClinicalFact;
+import gov.hhs.onc.leap.sls.data.data.HCSConceptDescriptor;
+import gov.hhs.onc.leap.sls.data.data.SimpleHCSConceptDescriptor;
 import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
