@@ -1,13 +1,11 @@
 package gov.hhs.onc.leap.v2.parser.data;
 
 
-
 import gov.hhs.onc.leap.sls.data.data.HCSBundle;
 import gov.hhs.onc.leap.sls.data.data.HCSClinicalFact;
 import gov.hhs.onc.leap.sls.data.data.HCSConceptDescriptor;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**

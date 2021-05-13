@@ -1,11 +1,12 @@
 package gov.hhs.onc.leap.sls.service.util;
 
-import gov.hhs.onc.leap.sls.service.data.LabelingTask;
-import gov.hhs.onc.leap.sls.service.data.entity.LabelingResult;
 import com.google.common.base.Joiner;
 import gov.hhs.onc.leap.sls.ccda.parser.data.CCDASimpleBundle;
 import gov.hhs.onc.leap.sls.data.data.HCSConceptDescriptor;
+import gov.hhs.onc.leap.sls.service.data.LabelingTask;
+import gov.hhs.onc.leap.sls.service.data.entity.LabelingResult;
 import gov.hhs.onc.leap.v2.parser.data.V2SimpleBundle;
+
 import java.util.ArrayList;
 import java.util.List;
 

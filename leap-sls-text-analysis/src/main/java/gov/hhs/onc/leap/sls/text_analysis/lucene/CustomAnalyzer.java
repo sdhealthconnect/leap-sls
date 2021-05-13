@@ -1,21 +1,19 @@
 package gov.hhs.onc.leap.sls.text_analysis.lucene;
 
+import org.apache.lucene.analysis.CharArraySet;
 import org.apache.lucene.analysis.StopwordAnalyzerBase;
-import org.apache.lucene.analysis.core.LetterTokenizer;
-import org.apache.lucene.analysis.miscellaneous.LengthFilter;
-import org.apache.lucene.analysis.standard.StandardFilter;
-
-
-import java.io.IOException;
-import java.io.Reader;
-
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.Tokenizer;
+import org.apache.lucene.analysis.core.LetterTokenizer;
 import org.apache.lucene.analysis.core.LowerCaseFilter;
 import org.apache.lucene.analysis.core.StopAnalyzer;
 import org.apache.lucene.analysis.core.StopFilter;
-import org.apache.lucene.analysis.CharArraySet;
+import org.apache.lucene.analysis.miscellaneous.LengthFilter;
+import org.apache.lucene.analysis.standard.StandardFilter;
 import org.apache.lucene.analysis.util.WordlistLoader;
+
+import java.io.IOException;
+import java.io.Reader;
 
 /**
  * ddecouteau@saperi.io

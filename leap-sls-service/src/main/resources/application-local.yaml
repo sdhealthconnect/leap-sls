@@ -1,9 +1,9 @@
 spring:
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: ${LEAP_DB_URL}
-    username: ${LEAP_DB_USER}
-    password: ${LEAP_DB_PASS}
+    url: ${LEAP_DB_URL:"jdbc:mysql://localhost:3306/leap?createDatabaseIfNotExist=true&autoReconnect=true&allowPublicKeyRetrieval=true&useSSL=false"}
+    username: ${LEAP_DB_USER:root}
+    password: ${LEAP_DB_PASS:changeme}
   jpa:
     hibernate.ddl-auto: create
     hibernate:

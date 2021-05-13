@@ -1,6 +1,7 @@
 package gov.hhs.onc.leap.sls.service.data;
 
 
+import gov.hhs.onc.leap.fhir.parser.data.FHIRR4BundleAdapter;
 import gov.hhs.onc.leap.sls.ccda.parser.data.CCDASimpleBundle;
 import gov.hhs.onc.leap.v2.parser.data.V2SimpleBundle;
 
@@ -25,6 +26,8 @@ public class LabelingTask {
     {
         this.record = record;
     }
+
+    public LabelingTask(FHIRR4BundleAdapter record) { this.record = record; }
 
     public void addComment(String comment)
     {

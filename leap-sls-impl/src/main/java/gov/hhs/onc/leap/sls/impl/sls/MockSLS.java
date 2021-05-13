@@ -3,13 +3,12 @@ package gov.hhs.onc.leap.sls.impl.sls;
 import gov.hhs.onc.leap.sls.data.data.HCSClinicalFact;
 import gov.hhs.onc.leap.sls.data.data.HCSConceptDescriptor;
 import gov.hhs.onc.leap.sls.data.sls.SLSInterface;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.stereotype.Component;
 
 /**
  * ddecouteau@saperi.io

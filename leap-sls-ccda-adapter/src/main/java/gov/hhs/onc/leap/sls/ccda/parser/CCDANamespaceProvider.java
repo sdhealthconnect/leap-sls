@@ -1,6 +1,5 @@
 package gov.hhs.onc.leap.sls.ccda.parser;
 
-import javax.xml.XMLConstants;
 import javax.xml.namespace.NamespaceContext;
 import java.util.HashMap;
 import java.util.Iterator;

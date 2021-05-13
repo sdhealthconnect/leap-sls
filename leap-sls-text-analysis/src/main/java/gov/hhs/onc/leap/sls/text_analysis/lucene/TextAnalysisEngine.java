@@ -1,12 +1,12 @@
 package gov.hhs.onc.leap.sls.text_analysis.lucene;
 
-import gov.hhs.onc.leap.sls.data.data.HCSConceptDescriptor;
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
+import gov.hhs.onc.leap.sls.data.data.HCSConceptDescriptor;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.analysis.CharArraySet;
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.index.memory.MemoryIndex;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.queryparser.classic.QueryParser;
@@ -14,6 +14,7 @@ import org.apache.lucene.search.Query;
 import org.apache.lucene.search.highlight.Highlighter;
 import org.apache.lucene.search.highlight.InvalidTokenOffsetsException;
 import org.apache.lucene.search.highlight.QueryScorer;
+
 import java.io.IOException;
 import java.util.*;
 

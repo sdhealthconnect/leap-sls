@@ -4,22 +4,17 @@ import gov.hhs.onc.leap.sls.data.data.HCSConceptDescriptor;
 import gov.hhs.onc.leap.sls.data.data.SimpleHCSConceptDescriptor;
 import gov.hhs.onc.leap.sls.impl.sls.MockSLSRule;
 import gov.hhs.onc.leap.sls.impl.sls.MockSLSRulesDB;
-import java.io.File;
-import java.io.FileInputStream;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 
 /**
  * ddecouteau@saperi.io

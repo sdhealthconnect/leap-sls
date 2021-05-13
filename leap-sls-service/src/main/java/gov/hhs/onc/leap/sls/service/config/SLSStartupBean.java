@@ -1,21 +1,23 @@
 package gov.hhs.onc.leap.sls.service.config;
 
 
+import gov.hhs.onc.leap.service.NlpSlsService;
+import gov.hhs.onc.leap.sls.impl.ruledb.CSVBasedRestrictedCodesSLSRulesDB;
 import gov.hhs.onc.leap.sls.service.data.entity.NlpSlsTask;
 import gov.hhs.onc.leap.sls.service.repository.LabelingResultRepository;
 import gov.hhs.onc.leap.sls.service.repository.NlpSlsTaskRepository;
-import gov.hhs.onc.leap.service.NlpSlsService;
-import gov.hhs.onc.leap.sls.impl.ruledb.CSVBasedRestrictedCodesSLSRulesDB;
-//import javax.ws.rs.WebApplicationException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+
+//import javax.ws.rs.WebApplicationException;
 
 
 /**
