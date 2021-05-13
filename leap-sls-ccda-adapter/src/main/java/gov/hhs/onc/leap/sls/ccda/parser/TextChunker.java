@@ -28,7 +28,7 @@ public class TextChunker {
     {
         List<String> chunks = new ArrayList<>();
 
-        text = CharMatcher.WHITESPACE.collapseFrom(text, ' ');
+        text = CharMatcher.whitespace().collapseFrom(text, ' ');
         Iterable<String> lines = Splitter.on(". ").omitEmptyStrings().split(text);
         String nextString="";
         for (String line : lines)
@@ -46,17 +46,4 @@ public class TextChunker {
 
         return chunks;
     }
-
-    public static void main(String[] args) throws IOException {
-
-        File file = new File("C:\\Moka\\Code\\ccda-parser\\src\\main\\resources\\text-sample.txt");
-        String text = Files.toString(file, Charset.forName("UTF-8"));
-
-        TextChunker chunker = new TextChunker();
-
-
-        List<String> chunks = chunker.getChunks(text);
-        System.out.println();
-    }
-
 }
