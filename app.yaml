@@ -1,1 +1,2 @@
+runtime: java11
 entrypoint: java -Xmx64m -jar leap-sls-service/target/leap-sls-service.0.0.1.jar
