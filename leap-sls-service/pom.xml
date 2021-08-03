@@ -10,7 +10,7 @@
     <groupId>gov.hhs.onc.leap</groupId>
     <artifactId>leap-sls-service</artifactId>
     <name>leap-sls-service</name>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <description>LEAP SLS ENDPOINT</description>
     
     <dependencies>
