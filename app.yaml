@@ -9,3 +9,5 @@ resources:
   cpu: 1
   memory_gb: 2.0
 instance_class: B4_1G
+manual_scaling:
+  instances: 1
