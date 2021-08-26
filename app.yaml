@@ -5,9 +5,11 @@ env_variables:
   LEAP_DB_USER: __DB_USER
   LEAP_DB_PASS: __DB_PASS
   HAPI_FHIR_URL: __HAPI_FHIR_URL
-instance_class: F4
 manual_scaling:
   instances: 1
+resources:
+  cpu: 1
+  memory_gb: 2.0
 network:
   forwarded_ports:
     - 9091/tcp
