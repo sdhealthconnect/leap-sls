@@ -4,3 +4,6 @@ env_variables:
   LEAP_DB_URL: jdbc:mysql://google/$DB_NAME?cloudSqlInstance=$CLOUD_SQL_CONNECTION_NAME&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false
   LEAP_DB_USER: $DB_USER
   LEAP_DB_PASS: $DB_PASS
+volumes:
+  - name: 'myvolume'
+    path: '/target'
