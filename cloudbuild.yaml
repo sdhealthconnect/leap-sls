@@ -1,6 +1,16 @@
 steps:
   - name: 'gcr.io/cloud-builders/mvn'
-    args: ['package']
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        cp leap-sls-service/target/leap-sls-service.0.0.1.jar /persistent_volume
+    volumes:
+      - name: 'myvolume'
+        path: '/target'
   - name: 'gcr.io/cloud-builders/gcloud'
     env: ['DB_NAME=${_DB_NAME}', 'CLOUD_SQL_CONNECTION_NAME=${_CLOUD_SQL_CONNECTION_NAME}','DB_USER=${_DB_USER}', 'DB_PASS=${_DB_PASS}']
     args: ['app', 'deploy']
+    volumes:
+      - name: 'myvolume'
+        path: '/target'
