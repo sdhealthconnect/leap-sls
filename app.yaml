@@ -11,5 +11,7 @@ resources:
   cpu: 1
   memory_gb: 2.0
 network:
+  instance_tag: SLS_NETWORK_CONFIG
+  name: SLS_NETWORK
   forwarded_ports:
     - 9091/tcp
