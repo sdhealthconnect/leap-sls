@@ -5,8 +5,10 @@ env_variables:
   LEAP_DB_USER: __DB_USER
   LEAP_DB_PASS: __DB_PASS
   HAPI_FHIR_URL: __HAPI_FHIR_URL
-manual_scaling:
-  instances: 1
+env: flex
+automatic_scaling:
+  min_num_instances: 1
+  max_num_instances: 1
 resources:
   cpu: 1
   memory_gb: 2.0
