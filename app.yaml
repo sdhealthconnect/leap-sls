@@ -8,8 +8,4 @@ env_variables:
 resources:
   cpu: 1
   memory_gb: 2.0
-network:
-  instance_tag: slsnetworkconf
-  name: slsnetwork
-  forwarded_ports:
-    - 9091/tcp
+instance_class: B4_1G
