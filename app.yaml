@@ -6,3 +6,6 @@ env_variables:
   LEAP_DB_PASS: __DB_PASS
   HAPI_FHIR_URL: __HAPI_FHIR_URL
 instance_class: F4
+network:
+  forwarded_ports:
+    - 9091/tcp
