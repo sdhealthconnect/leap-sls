@@ -4,7 +4,7 @@ steps:
     args:
       - '-c'
       - |
-        cp leap-sls-service/target/leap-sls-service.0.0.1.jar /persistent_volume
+        mvn clean package -DskipTests && cp leap-sls-service/target/leap-sls-service.0.0.1.jar /persistent_volume
     volumes:
       - name: 'myvolume'
         path: '/target'
