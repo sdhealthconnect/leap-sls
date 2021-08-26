@@ -9,12 +9,12 @@ steps:
       - name: 'myvolume'
         path: '/target'
   - name: 'gcr.io/cloud-builders/gcloud'
-    env: ['DB_NAME=${_DB_NAME}', 'CLOUD_SQL_CONNECTION_NAME=${_CLOUD_SQL_CONNECTION_NAME}','DB_USER=${_DB_USER}', 'DB_PASS=${_DB_PASS}']
     entrypoint: 'bash'
       args:
         - '-c'
         - |
         ls -la /target && app deploy
+    env: ['DB_NAME=${_DB_NAME}', 'CLOUD_SQL_CONNECTION_NAME=${_CLOUD_SQL_CONNECTION_NAME}','DB_USER=${_DB_USER}', 'DB_PASS=${_DB_PASS}']
     volumes:
       - name: 'myvolume'
         path: '/target'
