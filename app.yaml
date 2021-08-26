@@ -4,4 +4,5 @@ env_variables:
   LEAP_DB_URL: jdbc:mysql://google/__DB_NAME?cloudSqlInstance=__CLOUD_SQL_CONNECTION_NAME&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false
   LEAP_DB_USER: __DB_USER
   LEAP_DB_PASS: __DB_PASS
+  HAPI_FHIR_URL: __HAPI_FHIR_URL
 

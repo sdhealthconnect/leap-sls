@@ -16,4 +16,4 @@ spring:
     
 fhir:
   r4:
-    baseurl: http://localhost:8080/hapi-fhir-jpaserver/fhir/    
+    baseurl: ${HAPI_FHIR_URL:"http://localhost:8080/hapi-fhir-jpaserver/fhir/"}
