@@ -1,20 +1,6 @@
 steps:
   - name: 'gcr.io/cloud-builders/mvn'
-    entrypoint: 'bash'
-    args:
-      - '-c'
-      - |
-        mvn clean package -DskipTests && cp /workspace/leap-sls-service/target/leap-sls-service-0.0.1.jar /target && ls -la /target
-    volumes:
-      - name: 'myvolume'
-        path: '/target'
+    args: ['package']
   - name: 'gcr.io/cloud-builders/gcloud'
-    entrypoint: 'bash'
-    args:
-      - '-c'
-      - |
-        ls -la /target && gcloud app deploy app.yaml
     env: ['DB_NAME=${_DB_NAME}', 'CLOUD_SQL_CONNECTION_NAME=${_CLOUD_SQL_CONNECTION_NAME}','DB_USER=${_DB_USER}', 'DB_PASS=${_DB_PASS}']
-    volumes:
-      - name: 'myvolume'
-        path: '/target'
+    args: ['app', 'deploy']
