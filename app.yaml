@@ -5,6 +5,7 @@ env_variables:
   LEAP_DB_USER: __DB_USER
   LEAP_DB_PASS: __DB_PASS
   HAPI_FHIR_URL: __HAPI_FHIR_URL
+  PORT: __PORT
 resources:
   cpu: 1
   memory_gb: 2.0
