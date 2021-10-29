@@ -3605,3 +3605,4 @@
 "2.16.840.1.113883.6.96","SNOMED-Clinical Terms","Alcohol Abuse and Alcoholism Information","Alcohol-Abuse-ICD-9-SNOMED",15167005,"Alcohol abuse (disorder)"
 "2.16.840.1.113883.6.96","SNOMED-Clinical Terms","SICKLE CELL","SICKLE CELL-SNOMED",16402000,"Sickle cell trait (disorder)"
 "2.16.840.1.113883.6.103","ICD-9-CM","SICKLE CELL","SICKLE CELL-ICD-9-CM",282.5,"Sickle cell trait (disorder)"
+"2.16.840.1.113883.6.96","SNOMED-Clinical Terms","ACS","Colon Cancer-SNOMED",93761005,"Primary malignant neoplasm of colon"
