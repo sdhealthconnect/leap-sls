@@ -1,0 +1,14 @@
+runtime: java11
+entrypoint: java -Xmx256m -jar leap-sls-service/target/leap-sls-service-0.0.1.jar
+env_variables:
+  LEAP_DB_URL: jdbc:mysql://google/__DB_NAME?cloudSqlInstance=__CLOUD_SQL_CONNECTION_NAME&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false
+  LEAP_DB_USER: __DB_USER
+  LEAP_DB_PASS: __DB_PASS
+  HAPI_FHIR_URL: __HAPI_FHIR_URL
+  PORT: __PORT
+resources:
+  cpu: 1
+  memory_gb: 2.0
+instance_class: B4_1G
+manual_scaling:
+  instances: 1

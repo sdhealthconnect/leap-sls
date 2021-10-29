@@ -14,7 +14,7 @@ logging:
     gov.hhs.onc: DEBUG
     
 nlp:
-    enabled: false
+    enabled: ${NLP_ENABLED:false}
 
 info:
   app:

@@ -28,6 +28,7 @@
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <leap.ces.version>0.0.1</leap.ces.version>
+        <lombok.version>1.18.20</lombok.version>
     </properties>
 
     <repositories>
